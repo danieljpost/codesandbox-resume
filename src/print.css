@@ -1,0 +1,9 @@
+@media print {
+  #root a {
+    text-decoration: none;
+  }
+  #configurator {
+    display: none;
+    visibility: hidden;
+  }
+}
