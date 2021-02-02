@@ -1,7 +1,7 @@
 {
-  "name": "djpresume-react",
+  "name": "daniel-j-posts-resume-as-a-react-app",
   "version": "1.0.0",
-  "description": "An attempt to make my resume from a dynamic React App",
+  "description": "Just me using my resume as a good reason to play with UI using React",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
