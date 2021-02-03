@@ -34,12 +34,7 @@ const useStyles = makeStyles({
   }
 });
 export default function Configurator(props) {
-  const [state, setState] = React.useState({
-    tier: "DevOps",
-    verbosity: 7,
-    layout: "b",
-    darkmode: true
-  });
+  const [state, setState] = React.useState(props.config);
   const [value, setValue] = React.useState(42);
   const classes = useStyles();
   const handleChangeCheck = (event) => {
@@ -99,19 +94,16 @@ export default function Configurator(props) {
           color="primary"
           value={state.verbosity}
           min="1"
-          max="42"
+          max="10"
           step="1"
           onChange={handleChange}
         ></input>
       </div>
       <div>
         <Typography id="input-slider" gutterBottom>
-          Volume
+          Verbosity
         </Typography>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item>
-            <VolumeUp />
-          </Grid>
+        <Grid container spacing={2} alignItems="left">
           <Grid item xs>
             <Slider
               value={typeof value === "number" ? value : 0}
