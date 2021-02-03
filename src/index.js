@@ -1,17 +1,31 @@
 import Axios from "axios";
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 import Resume from "./resume/resume";
 import Configurator from "./configurator/configurator";
 
-import "./styles.css";
+import "./styles.scss";
 
 const configuratorElement = document.getElementById("configurator");
 const resumeElement = document.getElementById("resume");
+const configDefaults = {
+  darkmode: true,
+  verbosity: 7,
+  layout: "A",
+  skillsMinPriority: 3,
+  skillsMinExpertise: 5,
+  jobTier: "Front End",
+  showRecommendations: true
+};
 
-ReactDOM.render(<Configurator />, configuratorElement);
+let configState = configDefaults;
 
+render(<Configurator config={configState} />, configuratorElement);
+render(
+  <div className="loading">Loading Resume source data...</div>,
+  resumeElement
+);
 // obtain data from canonical source
-Axios.get("https://danieljpost.pro/resume.json").then((resp) => {
-  ReactDOM.render(<Resume myData={resp.data} />, resumeElement);
+Promise.all([Axios.get("https://danieljpost.pro/resume.json")]).then((resp) => {
+  render(<Resume config={configState} myData={resp[0].data} />, resumeElement);
 });

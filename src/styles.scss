@@ -1,9 +1,16 @@
+$colorDefault: #000;
+$colorDark: #ddd;
+$colorDark2: #eef;
+$backgroundColorDefault: #fff;
+$backgroundColorDark: #334;
+
 #root {
+  background-color: $backgroundColorDefault;
   font-family: sans-serif;
   /* font-size: 1rem; */
 }
 #root a {
-  color: #000;
+  color: $colorDefault;
   text-decoration: none;
 }
 .recommendation {
@@ -17,7 +24,7 @@
 }
 blockquote {
   font-family: serif;
-  color: #abc;
+  color: $colorDefault;
   margin: 0;
 }
 ul.ul-skills.layout-c {
@@ -81,15 +88,32 @@ article.gig {
   font-weight: bolder;
 }
 body {
-  background-color: #eee;
+  background-color: #ddd;
 }
 main {
-  background-color: #fff;
+  background-color: $backgroundColorDefault;
   padding: 1.5em;
   max-width: 900px;
   margin: 0 auto;
 }
+@media screen {
+  #root main.dark {
+    background-color: $backgroundColorDark;
+  }
+  #root main.dark * a,
+  #root main.dark header {
+    color: $colorDark2;
+  }
+  #root main.dark legend {
+    font-weight: bolder;
+    color: $backgroundColorDark;
+  }
+  #root main.dark * {
+    color: $colorDark;
+  }
+}
 .gig,
+
 .recommendation {
   break-after: auto;
   break-inside: avoid;
