@@ -18,11 +18,7 @@ function Gig(props) {
         {props.company}
         {location}
       </header>
-      <DateRange
-        key={"dr" + props._id}
-        startDate={props.startDate}
-        endDate={props.endDate}
-      />
+      <DateRange startDate={props.startDate} endDate={props.endDate} />
       {accomplishments}
       {responsibilities}
     </article>

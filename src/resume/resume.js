@@ -61,6 +61,7 @@ function Resume(props) {
     return (
       <Gig
         _id={v._id}
+        key={v._id}
         type={v.gigType}
         title={v.title}
         location={v.location}

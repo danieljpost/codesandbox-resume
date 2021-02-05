@@ -1,4 +1,3 @@
-import Axios from "axios";
 import React from "react";
 import { render } from "react-dom";
 import Resume from "./resume/resume";
@@ -8,6 +7,7 @@ import "./styles.scss";
 
 const configuratorElement = document.getElementById("configurator");
 const resumeElement = document.getElementById("resume");
+// TODO: set jobTier according to path parameter i.e. use "route"
 const configDefaults = {
   darkmode: true,
   verbosity: 7,
@@ -25,7 +25,12 @@ render(
   <div className="loading">Loading Resume source data...</div>,
   resumeElement
 );
-// obtain data from canonical source
-Promise.all([Axios.get("https://danieljpost.pro/resume.json")]).then((resp) => {
-  render(<Resume config={configState} myData={resp[0].data} />, resumeElement);
-});
+// // obtain data from canonical source
+// let route = React.route;
+console.log(React.route);
+let kvetch = fetch("https://danieljpost.pro/resume.json");
+kvetch
+  .then((response) => response.json())
+  .then((data) => {
+    render(<Resume config={configState} myData={data} />, resumeElement);
+  });
