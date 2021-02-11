@@ -6,9 +6,12 @@ function Gig(props) {
   // is controlled by app state
   const location = props.location ? " (" + props.location + ")" : "";
   const title = props.type === "contract" ? "" : props.title + ", ";
-  const accomplishments = props.accomplishments.map((a) => <div>{a}</div>);
+  const accomplishments = props.accomplishments.map((a, i) => (
+    <div key={props.title + i}>{a}</div>
+  ));
   const responsibilities =
-    props.responsibilities && props.responsibilities.map((a) => <div>{a}</div>);
+    props.responsibilities &&
+    props.responsibilities.map((a, i) => <div key={i}>{a}</div>);
 
   return (
     <article className="gig">
