@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 
 import FormHelperText from "@material-ui/core/FormHelperText";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -7,50 +6,10 @@ import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Slider from "@material-ui/core/Slider";
-import Input from "@material-ui/core/Input";
-import VolumeUp from "@material-ui/icons/VolumeUp";
 
-// TODO: get the options from resume.json
-const options = [
-  "DevOps",
-  "Back End",
-  "Front End",
-  "Software Engineer",
-  "User Experience",
-  "User Interface",
-  "Business",
-  "Consulting",
-  "Team Lead"
-];
-const useStyles = makeStyles({
-  root: {
-    width: 250
-  },
-  input: {
-    width: 42
-  }
-});
 export default function Configurator(props) {
   const [state, setState] = React.useState(props.config);
-  const [value, setValue] = React.useState(42);
-  const classes = useStyles();
   const handleChangeCheck = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-  const handleInputChange = (event) => {
-    setValue(event.target.value === "" ? "" : Number(event.target.value));
-  };
-  const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 100) {
-      setValue(100);
-    }
-  };
-  const handleSliderChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
@@ -60,6 +19,7 @@ export default function Configurator(props) {
       ...state,
       [name]: event.target.value
     });
+    console.log("State is", state);
   };
 
   return (
@@ -67,15 +27,15 @@ export default function Configurator(props) {
       <FormControl>
         <InputLabel htmlFor="tier-native-helper">Tier</InputLabel>
         <NativeSelect
-          value={state.tier}
+          value={state.jobTier}
           onChange={handleChange}
           inputProps={{
-            name: "tier",
+            name: "jobTier",
             id: "tier-native-helper"
           }}
         >
           <option aria-label="None" value="" />
-          {options.map((o) => (
+          {props.config.jobTierOptions.map((o) => (
             <option value={o}>{o}</option>
           ))}
         </NativeSelect>
@@ -83,10 +43,29 @@ export default function Configurator(props) {
           Choose which type of position this resume is for.
         </FormHelperText>
       </FormControl>
+      <hr />
 
-      <div>
+      <FormControl>
+        <InputLabel htmlFor="tier-native-helper">Layout</InputLabel>
+        <NativeSelect
+          value={state.layout}
+          onChange={handleChange}
+          inputProps={{
+            name: "layout",
+            id: "layout-native-helper"
+          }}
+        >
+          <option aria-label="None" value="" />
+          {props.config.layoutOptions.map((o) => (
+            <option value={o}>{o}</option>
+          ))}
+        </NativeSelect>
+        <FormHelperText>Choose which layout should be rendered.</FormHelperText>
+      </FormControl>
+      <hr />
+
+      <FormControl>
         <label for="verbosityinput">Verbosity: </label>
-
         <input
           id="verbosityinput"
           type="range"
@@ -98,60 +77,49 @@ export default function Configurator(props) {
           step="1"
           onChange={handleChange}
         ></input>
-      </div>
-      <div>
-        <Typography id="input-slider" gutterBottom>
-          Verbosity
-        </Typography>
-        <Grid container spacing={2} alignItems="left">
-          <Grid item xs>
-            <Slider
-              value={typeof value === "number" ? value : 0}
-              onChange={handleSliderChange}
-              aria-labelledby="input-slider"
-            />
-          </Grid>
-          <Grid item>
-            <Input
-              className={classes.input}
-              value={value}
-              margin="dense"
-              onChange={handleInputChange}
-              onBlur={handleBlur}
-              inputProps={{
-                step: 10,
-                min: 0,
-                max: 100,
-                type: "number",
-                "aria-labelledby": "input-slider"
-              }}
-            />
-          </Grid>
-        </Grid>
-      </div>
+      </FormControl>
+      <hr />
 
-      {/* <FormControl> */}
-      <FormControlLabel
-        value="does this matter"
-        control={
-          <Switch
-            name="darkmode"
-            value="dark"
-            checked={state.darkmode}
-            onChange={handleChangeCheck}
-            color="primary"
-          />
-        }
-        label="Use Dark Mode"
-        labelPlacement="start"
-      />
-      {/* </FormControl> */}
+      <FormControl>
+        <label for="verbosityinput">skillsMinPriority: </label>
+        <input
+          id="skillsMinPriority"
+          type="range"
+          name="skillsMinPriority"
+          color="primary"
+          value={state.skillsMinPriority}
+          min="1"
+          max="5"
+          step="1"
+          onChange={handleChange}
+        ></input>
+      </FormControl>
+      <hr />
+
+      <FormControl>
+        <FormControlLabel
+          value="does this matter"
+          control={
+            <Switch
+              name="darkmode"
+              value="dark"
+              checked={state.darkmode}
+              onChange={handleChangeCheck}
+              color="primary"
+            />
+          }
+          label="Use Dark Mode"
+          labelPlacement="start"
+        />
+      </FormControl>
+      <hr />
+      <hr />
 
       <pre>Verbosity: {state.verbosity}</pre>
-      <pre>Value (volume) {value}</pre>
-      <pre>Tier: {state.tier}</pre>
+      <pre>skillsMinPriority: {state.skillsMinPriority}</pre>
+      <pre>jobTier: {state.jobTier}</pre>
       <pre>Layout: {state.layout}</pre>
-      <pre>Dark Mode: {state.darkmode ? "true" : "false"}</pre>
+      <pre>Dark Mode: {state.darkmode ? "on" : "off"}</pre>
     </>
   );
 }

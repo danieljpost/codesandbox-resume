@@ -28,7 +28,19 @@ const configDefaults = {
   skillsMinPriority: 3,
   skillsMinExpertise: 5,
   jobTier: "Front End",
-  showRecommendations: true
+  showRecommendations: true,
+  jobTierOptions: [
+    "DevOps",
+    "Back End",
+    "Front End",
+    "Software Engineer",
+    "User Experience",
+    "User Interface",
+    "Business",
+    "Consulting",
+    "Team Lead"
+  ],
+  layoutOptions: ["A", "B", "C"]
 };
 
 let configState = configDefaults;
