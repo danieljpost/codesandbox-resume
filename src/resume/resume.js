@@ -102,6 +102,7 @@ function Resume(props) {
     .map((v, i) => {
       return (
         <Skill
+          key={i}
           name={v.name}
           title={v.sname}
           url={v.url}
