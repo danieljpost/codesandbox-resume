@@ -19,7 +19,7 @@ export default function Configurator(props) {
       ...state,
       [name]: event.target.value
     });
-    console.log("State is", state);
+    console.warn("State is", state);
   };
 
   return (

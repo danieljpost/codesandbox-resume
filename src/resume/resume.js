@@ -5,6 +5,8 @@ import Recommendation from "./recommendation";
 import Skill from "./skill";
 
 function Resume(props) {
+  const [state, setState] = React.useState(props.config);
+
   // TODO: choose layout types via app state.
 
   // TODO: this is controlled by app state
@@ -120,8 +122,8 @@ function Resume(props) {
 
   return (
     <main className={props.config.darkmode ? "dark" : "default"}>
-      (({myTier}))
       <Layout
+        config={state}
         skillshortlist={skillshortlist}
         name={name}
         email={email}

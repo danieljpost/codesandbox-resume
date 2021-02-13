@@ -1,9 +1,13 @@
 import React from "react";
 
 function Layout(props) {
+  const [state, setState] = React.useState(props.config);
+  console.log("got state here", state);
+
   if ("b" === props.layout) {
     return (
       <LayoutB
+        config={state}
         name={props.name}
         phone={props.phone}
         email={props.email}
@@ -18,6 +22,7 @@ function Layout(props) {
 
   return (
     <LayoutA
+      config={state}
       skillshortlist={props.skillshortlist}
       name={props.name}
       phone={props.phone}
@@ -45,8 +50,19 @@ function Layout(props) {
  * @param {} props
  */
 function LayoutA(props) {
+  const [state, setState] = React.useState(props.config);
+
+  console.log("got state", state);
+
   return (
     <>
+      <pre>Verbosity: {state.verbosity}</pre>
+      {/* <pre>skillsMinPriority: {state.skillsMinPriority}</pre>
+      <pre>jobTier: {state.jobTier}</pre>
+      <pre>Layout: {state.layout}</pre>
+      <pre>Dark Mode: {state.darkmode ? "on" : "off"}</pre> */}
+      <hr />
+
       <header className="h-card">
         {props.name} {props.phone} {props.email}
       </header>
