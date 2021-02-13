@@ -1,6 +1,5 @@
 import React from "react";
 
-import FormHelperText from "@material-ui/core/FormHelperText";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
@@ -8,61 +7,41 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
 export default function Configurator(props) {
-  const [state, setState] = React.useState(props.config);
-  const handleChangeCheck = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value
-    });
-    console.warn("State is", state);
-  };
-
   return (
     <>
       <FormControl>
         <InputLabel htmlFor="tier-native-helper">Tier</InputLabel>
         <NativeSelect
-          value={state.jobTier}
-          onChange={handleChange}
+          value={props.state.jobTier}
+          onChange={props.handleChange}
           inputProps={{
             name: "jobTier",
             id: "tier-native-helper"
           }}
         >
           <option aria-label="None" value="" />
-          {props.config.jobTierOptions.map((o) => (
+          {props.state.jobTierOptions.map((o) => (
             <option value={o}>{o}</option>
           ))}
         </NativeSelect>
-        <FormHelperText>
-          Choose which type of position this resume is for.
-        </FormHelperText>
       </FormControl>
-      <hr />
 
       <FormControl>
         <InputLabel htmlFor="tier-native-helper">Layout</InputLabel>
         <NativeSelect
-          value={state.layout}
-          onChange={handleChange}
+          value={props.state.layout}
+          onChange={props.handleChange}
           inputProps={{
             name: "layout",
             id: "layout-native-helper"
           }}
         >
           <option aria-label="None" value="" />
-          {props.config.layoutOptions.map((o) => (
+          {props.state.layoutOptions.map((o) => (
             <option value={o}>{o}</option>
           ))}
         </NativeSelect>
-        <FormHelperText>Choose which layout should be rendered.</FormHelperText>
       </FormControl>
-      <hr />
 
       <FormControl>
         <label for="verbosityinput">Verbosity: </label>
@@ -71,14 +50,13 @@ export default function Configurator(props) {
           type="range"
           name="verbosity"
           color="primary"
-          value={state.verbosity}
+          value={props.state.verbosity}
           min="1"
           max="10"
           step="1"
-          onChange={handleChange}
+          onChange={props.handleChange}
         ></input>
       </FormControl>
-      <hr />
 
       <FormControl>
         <label for="verbosityinput">skillsMinPriority: </label>
@@ -87,14 +65,13 @@ export default function Configurator(props) {
           type="range"
           name="skillsMinPriority"
           color="primary"
-          value={state.skillsMinPriority}
+          value={props.state.skillsMinPriority}
           min="1"
           max="5"
           step="1"
-          onChange={handleChange}
+          onChange={props.handleChange}
         ></input>
       </FormControl>
-      <hr />
 
       <FormControl>
         <FormControlLabel
@@ -103,8 +80,8 @@ export default function Configurator(props) {
             <Switch
               name="darkmode"
               value="dark"
-              checked={state.darkmode}
-              onChange={handleChangeCheck}
+              checked={props.state.darkmode}
+              onChange={props.handleChangeCheck}
               color="primary"
             />
           }
@@ -112,14 +89,6 @@ export default function Configurator(props) {
           labelPlacement="start"
         />
       </FormControl>
-      <hr />
-      <hr />
-
-      <pre>Verbosity: {state.verbosity}</pre>
-      <pre>skillsMinPriority: {state.skillsMinPriority}</pre>
-      <pre>jobTier: {state.jobTier}</pre>
-      <pre>Layout: {state.layout}</pre>
-      <pre>Dark Mode: {state.darkmode ? "on" : "off"}</pre>
     </>
   );
 }

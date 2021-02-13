@@ -45,13 +45,6 @@ const configDefaults = {
 
 let configState = configDefaults;
 
-render(<Configurator config={configState} />, configuratorElement);
-render(
-  <div className="loading">Loading Resume source data...</div>,
-  resumeElement
-);
-
-// TODO: routing
 // if there's a pathname element to window.location,
 // try to fetch the configuration from the backend,
 // merge with defaults before rendering anything
@@ -59,7 +52,6 @@ render(
 // TODO: configuration
 // once I've found a configuration I like, persist it and name it
 // so that configuration can be retrieved later
-console.log(window.location);
 
 // obtain data from canonical source
 let kvetch = fetch("https://danieljpost.pro/resume.json");

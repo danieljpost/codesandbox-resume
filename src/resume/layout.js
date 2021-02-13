@@ -1,13 +1,12 @@
 import React from "react";
 
 function Layout(props) {
-  const [state, setState] = React.useState(props.config);
-  console.log("got state here", state);
+  console.log("got state here", props.state);
 
   if ("b" === props.layout) {
     return (
       <LayoutB
-        config={state}
+        state={props.state}
         name={props.name}
         phone={props.phone}
         email={props.email}
@@ -22,7 +21,7 @@ function Layout(props) {
 
   return (
     <LayoutA
-      config={state}
+      state={props.state}
       skillshortlist={props.skillshortlist}
       name={props.name}
       phone={props.phone}
@@ -50,25 +49,24 @@ function Layout(props) {
  * @param {} props
  */
 function LayoutA(props) {
-  const [state, setState] = React.useState(props.config);
-
-  console.log("got state", state);
-
   return (
     <>
-      <pre>Verbosity: {state.verbosity}</pre>
-      {/* <pre>skillsMinPriority: {state.skillsMinPriority}</pre>
-      <pre>jobTier: {state.jobTier}</pre>
-      <pre>Layout: {state.layout}</pre>
-      <pre>Dark Mode: {state.darkmode ? "on" : "off"}</pre> */}
+      <pre>Tier: {props.state.jobTier}</pre>
+      <pre>Layout: {props.state.layout}</pre>
+      <pre>Verbosity: {props.state.verbosity}</pre>
+      <pre>skillsMinPriority: {props.state.skillsMinPriority}</pre>
+      <pre>Dark Mode: {props.state.darkmode ? "on" : "off"}</pre>
+
+      <hr />
+
       <hr />
 
       <header className="h-card">
         {props.name} {props.phone} {props.email}
       </header>
-      <h4>Introduction</h4>
+      <h4>{props.state.jobTier} Introduction</h4>
       <header>{props.intro}</header>
-      <h4>Skills</h4>
+      <h4>Skills {props.skills.length}</h4>
       <ul className="ul-skills layout-c">{props.skills}</ul>
       <h4>Experience</h4>
       {props.gigs}

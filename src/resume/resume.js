@@ -1,4 +1,5 @@
 import React from "react";
+import Configurator from "../configurator/configurator";
 import Layout from "./layout";
 import Gig from "./gig";
 import Recommendation from "./recommendation";
@@ -7,10 +8,20 @@ import Skill from "./skill";
 function Resume(props) {
   const [state, setState] = React.useState(props.config);
 
-  // TODO: choose layout types via app state.
+  const handleChangeCheck = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
 
-  // TODO: this is controlled by app state
-  const myTier = "User Interface";
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setState({
+      ...state,
+      [name]: isNaN(value) ? value : Number(value)
+    });
+    console.warn("State is", state);
+  };
+
   // TODO: consolidate into contactinfo object
   const phone = <div className="p-tel">612-367-6902</div>;
   const name = <div>Daniel J. Post</div>;
@@ -45,11 +56,11 @@ function Resume(props) {
     // a must be equal to b
     return 0;
   };
-  const filterSkillsByTier = (skill) => {
-    return skill.tiers.includes(myTier);
-  };
+  // const filterSkillsByTier = (skill) => {
+  //   return skill.tiers.includes(myTier);
+  // };
   const filterSkillsbyPriority = (skill) => {
-    return skill.priority > 10 - props.config.verbosity;
+    return skill.priority >= state.skillsMinPriority;
   };
 
   // const skillCategories = props.myData.skills.map((v, i) => v.category);
@@ -97,7 +108,7 @@ function Resume(props) {
   // TODO: filter by tier from state, group by category, by experience depending on verbosity request
   const skills = props.myData.skills
     .filter(filterSkillsbyPriority)
-    .filter(filterSkillsByTier)
+    // .filter(filterSkillsByTier)
     .sort(sortSkillsByPriority)
     .map((v, i) => {
       return (
@@ -119,12 +130,17 @@ function Resume(props) {
   ));
 
   // TODO: choose intro based on state
-  const intro = props.myData.intros[myTier];
+  const intro = props.myData.intros[state.jobTier];
 
   return (
     <main className={props.config.darkmode ? "dark" : "default"}>
+      <Configurator
+        handleChange={handleChange}
+        handleChangeCheck={handleChangeCheck}
+        state={state}
+      />
       <Layout
-        config={state}
+        state={state}
         skillshortlist={skillshortlist}
         name={name}
         email={email}
