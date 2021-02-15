@@ -2,6 +2,7 @@ import React from "react";
 
 function RecommendationDate(props) {
   // TODO: internationalize, etc.
+  // this probably would involve importing some date module
   // having hardcoded months is teh dumb
   const regexpYmd = /(\d{4})-(\d{2})-(\d{2})/;
   const months = {

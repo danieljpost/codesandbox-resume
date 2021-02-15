@@ -9,6 +9,13 @@ function Resume(props) {
   const [state, setState] = React.useState(props.config);
 
   const handleChangeCheck = (event) => {
+    if ("darkmode" === event.target.name) {
+      console.log("got here", event.target.checked);
+      localStorage.setItem(
+        "dark-mode-preference",
+        event.target.checked ? "on" : "off"
+      );
+    }
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
@@ -33,19 +40,7 @@ function Resume(props) {
     </div>
   );
 
-  // const companies = props.myData.companies.map(
-  //   (v, i) => { return <section>{v.name}, {v.url}</section>}
-  // );
-  const sortGigsByDate = (a, b) => {
-    if (a.startDate > b.startDate) {
-      return -1;
-    }
-    if (a.startDate < b.startDate) {
-      return 1;
-    }
-    // a must be equal to b
-    return 0;
-  };
+  // Gig filtering is done here, now but may be moved to the Layout in the future
   const sortSkillsByPriority = (a, b) => {
     if (a.expertise > b.expertise) {
       return -1;
@@ -56,9 +51,9 @@ function Resume(props) {
     // a must be equal to b
     return 0;
   };
-  // const filterSkillsByTier = (skill) => {
-  //   return skill.tiers.includes(myTier);
-  // };
+  const filterSkillsByTier = (skill) => {
+    return skill.tiers.includes(state.jobTier);
+  };
   const filterSkillsbyPriority = (skill) => {
     return skill.priority >= state.skillsMinPriority;
   };
@@ -67,16 +62,39 @@ function Resume(props) {
 
   // TODO: filter gigs by date, type depending on verbosity request
   // TODO: change gig layout depending on verbostiy or style request
-  const gigs = props.myData.gigs.sort(sortGigsByDate).map((v, i) => {
+  // Gig filtering is done here, now but may be moved to the Layout in the future
+  const sortGigsByDate = (a, b) => {
+    if (a.startDate > b.startDate) {
+      return -1;
+    }
+    if (a.startDate < b.startDate) {
+      return 1;
+    }
+    // a must be equal to b
+    return 0;
+  };
+
+  const ownerGigs = props.myData.gigs.filter((g) => g.gigType === "owner");
+  const contractGigs = props.myData.gigs.filter(
+    (g) => g.gigType === "contract"
+  );
+  const employeeGigs = props.myData.gigs.filter(
+    (g) => g.gigType === "employee"
+  );
+
+  // if (true) {
+  let experience = props.myData.gigs.sort(sortGigsByDate).map((v, i) => {
     let company = props.myData.companies.find((c) => {
       return c._id === v.companyId;
     });
     return (
       <Gig
         _id={v._id}
+        verbosity={state.verbosity}
         key={v._id}
-        type={v.gigType}
+        gigType={v.gigType}
         title={v.title}
+        showlocation={state.showlocation}
         location={v.location}
         companyId={v.companyId}
         company={company.fullname}
@@ -84,26 +102,30 @@ function Resume(props) {
         startDate={v.startDate}
         longDesc={v.longDesc}
         shortDesc={v.shortDesc}
+        responsibilities={v.responsibilities}
         accomplishments={v.accomplishments}
         skills={v.skills}
       />
     );
   });
+  // }
 
   // TODO: filter by date depending on verbosity request
-  const recommendations = props.myData.recommendations.map((v, i) => {
-    return (
-      <Recommendation
-        key={i}
-        when={v.when}
-        name={v.name}
-        title={v.title}
-        linkedIn={v.linkedIn}
-        relationship={v.relationship}
-        recommendation={v.recommendation}
-      />
-    );
-  });
+  const recommendations = props.myData.recommendations
+    .filter((v, i) => i < state.verbosity / 2)
+    .map((v, i) => {
+      return (
+        <Recommendation
+          key={i}
+          when={v.when}
+          name={v.name}
+          title={v.title}
+          linkedIn={v.linkedIn}
+          relationship={v.relationship}
+          recommendation={v.recommendation}
+        />
+      );
+    });
 
   // TODO: filter by tier from state, group by category, by experience depending on verbosity request
   const skills = props.myData.skills
@@ -125,11 +147,7 @@ function Resume(props) {
       );
     });
 
-  const skillshortlist = props.myData.skills.map((s, i) => (
-    <span key={i}>"{s.sname}"&nbsp;</span>
-  ));
-
-  // TODO: choose intro based on state
+  // choose intro based on state
   const intro = props.myData.intros[state.jobTier];
 
   return (
@@ -137,16 +155,16 @@ function Resume(props) {
       <Configurator
         handleChange={handleChange}
         handleChangeCheck={handleChangeCheck}
+        reset={props.reset}
         state={state}
       />
       <Layout
         state={state}
-        skillshortlist={skillshortlist}
         name={name}
         email={email}
         phone={phone}
         intro={intro}
-        gigs={gigs}
+        experience={experience}
         recommendations={recommendations}
         skills={skills}
       />
