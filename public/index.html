@@ -27,6 +27,117 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
     />
+    <style>
+      .container {
+  left: 50%;
+  margin: auto -2em;
+  position: absolute;
+  top: 50%;
+}
+h1 {
+  font-size: 3em;
+  text-align: center;
+  top: 25%;
+}
+.progressContainer { 
+  position: relative; 
+  top: 60px; 
+  margin: auto;
+  padding: 0;
+  width: 33%;}
+#progressBar {
+  width: 100%;
+}
+.swing div {
+  border-radius: 50%;
+  float: left;
+  height: 1em;
+  width: 1em;
+}
+.swing div:first-of-type {
+  background: linear-gradient(to left, #fbb 0%, #800 100%);
+}
+.swing div {
+  background: linear-gradient(to bottom, #bfb 0%, #080 100%);
+}
+.swing div:last-of-type {
+  background: linear-gradient(to right, #bbf 0%, #008 100%);
+}
+.shadow {
+  clear: left;
+  padding-top: 0.4em;
+}
+.shadow div {
+  filter: blur(1px);
+  float: left;
+  width: 1em;
+  height: 0.25em;
+  border-radius: 50%;
+  background: #898;
+}
+.shadow .shadow-l {
+  background: #200;
+}
+.shadow .shadow-r {
+  background: #002;
+}
+@keyframes ball-l {
+  0%,
+  50% {
+    transform: rotate(0) translateX(0);
+  }
+  100% {
+    transform: rotate(50deg) translateX(-2.5em);
+  }
+}
+@keyframes ball-r {
+  0% {
+    transform: rotate(-50deg) translateX(2.5em);
+  }
+  50%,
+  100% {
+    transform: rotate(0) translateX(0);
+  }
+}
+@keyframes shadow-l-n {
+  0%,
+  50% {
+    opacity: 0.5;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0.125;
+    transform: translateX(-1.75em);
+  }
+}
+@keyframes shadow-r-n {
+  0% {
+    opacity: 0.125;
+    transform: translateX(1.75em);
+  }
+  50%,
+  100% {
+    opacity: 0.5;
+    transform: translateX(0);
+  }
+}
+.swing-l {
+  animation: ball-l 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite alternate;
+}
+.swing-r {
+  animation: ball-r 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19) infinite
+    alternate;
+}
+.shadow-l {
+  animation: shadow-l-n 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite
+    alternate;
+}
+.shadow-r {
+  animation: shadow-r-n 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19) infinite
+    alternate;
+}
+
+      </style>
   </head>
 
   <body>
@@ -34,8 +145,27 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root">
-      <div id="configurator"></div>
-      <div id="resume">Here's some placeholder HTML</div>
+      <div id="resume">
+        <h1>Loading</h1>
+
+        <div
+          aria-busy="true"
+          aria-label="Loading..."
+          role="progressbar"
+          class="container"
+        >
+          <div class="swing">
+            <div class="swing-l"></div>
+            <div></div>
+            <div class="swing-r"></div>
+          </div>
+          <div class="shadow">
+            <div class="shadow-l"></div>
+            <div></div>
+            <div class="shadow-r"></div>
+          </div>
+        </div>
+      </div>
     </div>
     <!--
       This HTML file is a template.
