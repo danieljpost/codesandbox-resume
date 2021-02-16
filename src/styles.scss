@@ -16,9 +16,9 @@ $backgroundColorDark: #334;
 .recommendation {
   margin: 1em 0;
 }
-.recommendation label {
-  color: blue;
-}
+// .recommendation label {
+//  color: blue;
+// }
 .gig {
   outline: 0px dashed green;
 }
@@ -58,10 +58,15 @@ header:first-of-type > div {
   flex: 1;
 }
 article.gig {
-  margin-bottom: 1em;
+  margin: 1em 0;
 }
-.gig {
+.gig > header {
   position: relative;
+}
+span.date.right {
+  position: absolute;
+  right: 0;
+
 }
 .gig legend {
   top: -15px;
@@ -80,9 +85,14 @@ article.gig {
   color: #4a4;
   background-color: #cec;
 }
-.gig .owner {
-  color: #a44;
-  background-color: #ecc;
+.gig.contractGig {
+  font-size: .9em;
+}
+.ownerGig {
+  position: relative;
+  background-color: rgba(0,0,0,.4);
+  margin: 20px -20px;
+  padding: 10px 20px;
 }
 .gig > header {
   font-weight: bolder;
@@ -112,16 +122,31 @@ main {
     color: $colorDark;
   }
 }
-.gig,
 
 .recommendation {
+  background-color: rgba(255,255,255,.25);
+  padding: 20px;
+  margin: 0 -20px;  
   break-after: auto;
   break-inside: avoid;
 }
 section {
-  break-before: auto;
-  break-inside: avoid;
+  break-before: avoid;
+  break-inside: always;
 }
+
+#configurator {
+  background-color: rgba(255,255,255,.3);
+  margin: -10px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+#as-configured {
+  line-height: .4em;
+//   // display: none;
+//   // visibility: hidden;
+}
+
 
 /********/
 
@@ -129,8 +154,21 @@ section {
   #root a {
     text-decoration: none;
   }
-  #configurator {
+  #configurator, iframe {
     display: none;
     visibility: hidden;
   }
+  #as-configured {
+    display: inline-block;
+    visibility: visible;
+  }
+}
+aside.recommendation {
+  position: relative;
+}
+.recommendation
+time {
+  // color: red;
+  position: absolute;
+  right: 20px;
 }

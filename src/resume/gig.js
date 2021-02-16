@@ -2,10 +2,21 @@ import React from "react";
 import DateRange from "./dateRange";
 
 function Gig(props) {
-  if (true) {
+  // TODO: if verbosity is maxed out, add "skills used" to each Gig
+  let techMap = ["dang"];
+  if (props.technologies) {
+    techMap = props.technologies.map((t, i) => t.skillName);
   }
-  return ChronologicalGig(props);
+  let skillsUsed = props.verbosity > 9 ? techMap : [];
+  let useProps = { ...props, skillsUsed };
+  if ("contract" === props.gigType) {
+    return ContractGig(useProps);
+  } else if ("owner" === props.gigType) {
+    return OwnerGig(useProps);
+  }
+  return ChronologicalGig(useProps);
 }
+
 function ChronologicalGig(props) {
   // the verbosity of the gig object is controlled by app state, passed in as props.verbosity
   // TODO: at max verbosity (>=90%) also show which skills are used
@@ -24,22 +35,26 @@ function ChronologicalGig(props) {
       .filter((v, i) => i < maxResponsibilities)
       .map((a, i) => <div key={i}>{a}</div>);
 
+  let skillsUsed = "";
+  if (props.skillsUsed.length) {
+    let someSkills = props.skillsUsed.join(", ");
+    skillsUsed = <div>Skills used: {someSkills}</div>;
+  }
   return (
-    <article className="gig">
-      <legend className={props.gigType}>{props.gigType}</legend>
-      <p>verbosity {props.verbosity}</p>
-      <header>
-        {title}
-        {props.company}
-        {location}
-      </header>
-      <DateRange startDate={props.startDate} endDate={props.endDate} />
-      <hr />
-      {accomplishments}
-      <hr />
-      {responsibilities}
-      <hr />
-    </article>
+    <>
+      <article className="gig chronologicalGig">
+        {/* <legend className={props.gigType}>{props.gigType}</legend> */}
+        <header>
+          <DateRange startDate={props.startDate} endDate={props.endDate} />
+          {title}
+          {props.company}
+          {location}
+        </header>
+        {accomplishments}
+        {responsibilities}
+        {skillsUsed}
+      </article>
+    </>
   );
 }
 
@@ -61,21 +76,25 @@ function ContractGig(props) {
       .filter((v, i) => i < maxResponsibilities)
       .map((a, i) => <div key={i}>{a}</div>);
 
+  let skillsUsed = "";
+  if (props.skillsUsed.length) {
+    let someSkills = props.skillsUsed.join(", ");
+    skillsUsed = <div>Skills used: {someSkills}</div>;
+  }
+
   return (
-    <article className="gig">
-      <legend className={props.gigType}>{props.gigType}</legend>
-      <p>verbosity {props.verbosity}</p>
+    <article className="gig contractGig">
+      {/* <legend className={props.gigType}>{props.gigType}</legend> */}
       <header>
-        {title}
         {props.company}
+        &nbsp;
+        <DateRange startDate={props.startDate} endDate={props.endDate} />
         {location}
       </header>
-      <DateRange startDate={props.startDate} endDate={props.endDate} />
-      <hr />
+
       {accomplishments}
-      <hr />
       {responsibilities}
-      <hr />
+      {skillsUsed}
     </article>
   );
 }
@@ -97,22 +116,24 @@ function OwnerGig(props) {
       .filter((v, i) => i < maxResponsibilities)
       .map((a, i) => <div key={i}>{a}</div>);
 
+  let skillsUsed = "";
+  if (props.skillsUsed.length) {
+    let someSkills = props.skillsUsed.join(", ");
+    skillsUsed = <div>Toolses used: {someSkills}</div>;
+  }
   return (
-    <article className="gig">
-      <legend className={props.gigType}>{props.gigType}</legend>
-      <p>verbosity {props.verbosity}</p>
+    <section className="gig ownerGig">
       <header>
+        <DateRange startDate={props.startDate} endDate={props.endDate} />
         {title}
         {props.company}
         {location}
       </header>
-      <DateRange startDate={props.startDate} endDate={props.endDate} />
-      <hr />
       {accomplishments}
-      <hr />
       {responsibilities}
-      <hr />
-    </article>
+      {skillsUsed}
+      {props.contracts}
+    </section>
   );
 }
 

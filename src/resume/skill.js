@@ -9,7 +9,7 @@ function Skill(props) {
     "Category: " + props.category
   ].join("\n");
   return (
-    <li key={props._id}>
+    <li>
       <a
         href={props.url}
         title={d}

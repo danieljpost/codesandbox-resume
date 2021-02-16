@@ -4,13 +4,14 @@ import RecommendationDate from "./recommendationDate";
 function Recommendation(props) {
   const when = <RecommendationDate when={props.when} />;
   return (
-    <article className="recommendation">
+    <aside className="recommendation">
       <blockquote>{props.recommendation}</blockquote>
       <label>
-        <a href={props.linkedIn}>{props.name}</a>, {when}
+        <a href={props.linkedIn}>{props.name}</a> {when}
       </label>
-      <em>{props.relationship}</em>
-    </article>
+      <br />
+      <cite>{props.relationship}</cite>
+    </aside>
   );
 }
 

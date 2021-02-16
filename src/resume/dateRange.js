@@ -31,11 +31,11 @@ function DateRange(props) {
   const startDate = transformDate(props.startDate);
   const endDate = transformDate(props.endDate);
   return (
-    <>
+    <span className="date right">
       <time dateTime={props.startDate}>{startDate}</time>
       &nbsp;-&nbsp;
       <time dateTime={props.endDate || "now"}>{endDate}</time>
-    </>
+    </span>
   );
 }
 

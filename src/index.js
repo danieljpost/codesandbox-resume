@@ -43,7 +43,8 @@ const configDefaults = {
     "Team Lead"
   ],
   chronologyOptions: ["Hybrid", "Chronological"],
-  layoutOptions: ["A", "B"]
+  layoutOptions: ["A", "B"],
+  magicUrl: window.location.href
 };
 
 let configState = configDefaults;

@@ -8,23 +8,34 @@ function Layout(props) {
     }
     return (
       <>
-        <pre>Tier: {props.state.jobTier}</pre>
-        <pre>Layout: {props.state.layout}</pre>
-        <pre>Verbosity: {props.state.verbosity}</pre>
-        <pre>chronology: {props.state.chronology}</pre>
-        <pre>Sequence: {props.state.sequence}</pre>
-        <pre>Recommendations: {props.state.recommendations}</pre>
-        <pre>skillsMinPriority: {props.state.skillsMinPriority}</pre>
-        <pre>Dark Mode: {props.state.darkmode ? "on" : "off"}</pre>
-        <pre>Show Location: {props.state.showlocation ? "on" : "off"}</pre>
         <hr />
+        <aside id="as-configured">
+          <pre>Downloaded from {props.state.magicUrl}</pre>
+          <pre>Tier: {props.state.jobTier}</pre>
+          <pre>Layout: {props.state.layout}</pre>
+          <pre>Verbosity: {props.state.verbosity}</pre>
+          <pre>chronology: {props.state.chronology}</pre>
+          <pre>Sequence: {props.state.sequence}</pre>
+          <pre>Recommendations: {props.state.recommendations}</pre>
+          <pre>skillsMinPriority: {props.state.skillsMinPriority}</pre>
+          <pre>Dark Mode: {props.state.darkmode ? "on" : "off"}</pre>
+          <pre>Show Location: {props.state.showlocation ? "on" : "off"}</pre>
+        </aside>
       </>
     );
   };
+  let recommendations = "";
+  if (props.recommendations.length) {
+    recommendations = (
+      <>
+        <h4>Recommendations</h4>
+        {props.recommendations}
+      </>
+    );
+  }
   if ("b" === props.layout) {
     return (
       <>
-        {stuff()}
         <LayoutB
           state={props.state}
           name={props.name}
@@ -33,16 +44,16 @@ function Layout(props) {
           availability={props.availability}
           intro={props.intro}
           skills={props.skills}
-          gigs={props.gigs}
-          recommendations={props.recommendations}
+          experience={props.experience}
+          recommendations={recommendations}
         />
+        {stuff()}
       </>
     );
   }
 
   return (
     <>
-      {stuff()}
       <LayoutA
         state={props.state}
         skillshortlist={props.skillshortlist}
@@ -52,9 +63,10 @@ function Layout(props) {
         availability={props.availability}
         intro={props.intro}
         skills={props.skills}
-        gigs={props.gigs}
-        recommendations={props.recommendations}
+        experience={props.experience}
+        recommendations={recommendations}
       />
+      {stuff()}
     </>
   );
 }
@@ -84,7 +96,7 @@ function LayoutA(props) {
       <ul className="ul-skills layout-c">{props.skills}</ul>
       <h4>Experience</h4>
       {props.experience}
-      <h4>Recommendations</h4>
+
       {props.recommendations}
     </>
   );

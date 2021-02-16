@@ -10,11 +10,11 @@ function Resume(props) {
 
   const handleChangeCheck = (event) => {
     if ("darkmode" === event.target.name) {
-      console.log("got here", event.target.checked);
       localStorage.setItem(
         "dark-mode-preference",
         event.target.checked ? "on" : "off"
       );
+      window.location.reload();
     }
     setState({ ...state, [event.target.name]: event.target.checked });
   };
@@ -26,7 +26,6 @@ function Resume(props) {
       ...state,
       [name]: isNaN(value) ? value : Number(value)
     });
-    console.warn("State is", state);
   };
 
   // TODO: consolidate into contactinfo object
@@ -82,37 +81,126 @@ function Resume(props) {
     (g) => g.gigType === "employee"
   );
 
-  // if (true) {
-  let experience = props.myData.gigs.sort(sortGigsByDate).map((v, i) => {
-    let company = props.myData.companies.find((c) => {
-      return c._id === v.companyId;
+  let experience;
+  if ("Chronological" === state.chronology) {
+    experience = props.myData.gigs.sort(sortGigsByDate).map((v, i) => {
+      let company = props.myData.companies.find((c) => {
+        return c._id === v.companyId;
+      });
+      return (
+        <Gig
+          _id={v._id}
+          verbosity={state.verbosity}
+          key={v._id}
+          gigType={v.gigType}
+          title={v.title}
+          showlocation={state.showlocation}
+          location={v.location}
+          companyId={v.companyId}
+          company={company.fullname}
+          endDate={v.endDate}
+          startDate={v.startDate}
+          longDesc={v.longDesc}
+          shortDesc={v.shortDesc}
+          responsibilities={v.responsibilities}
+          accomplishments={v.accomplishments}
+          skills={v.skills}
+          technologies={v.technologies}
+        />
+      );
     });
-    return (
-      <Gig
-        _id={v._id}
-        verbosity={state.verbosity}
-        key={v._id}
-        gigType={v.gigType}
-        title={v.title}
-        showlocation={state.showlocation}
-        location={v.location}
-        companyId={v.companyId}
-        company={company.fullname}
-        endDate={v.endDate}
-        startDate={v.startDate}
-        longDesc={v.longDesc}
-        shortDesc={v.shortDesc}
-        responsibilities={v.responsibilities}
-        accomplishments={v.accomplishments}
-        skills={v.skills}
-      />
-    );
-  });
-  // }
+  } else {
+    let contractGigObjects = contractGigs.map((v, i) => {
+      let company = props.myData.companies.find((c) => {
+        return c._id === v.companyId;
+      });
+      return (
+        <Gig
+          _id={v._id}
+          verbosity={state.verbosity / 2}
+          key={v._id}
+          gigType={v.gigType}
+          title={v.title}
+          showlocation={state.showlocation}
+          location={v.location}
+          companyId={v.companyId}
+          company={company.fullname}
+          endDate={v.endDate}
+          startDate={v.startDate}
+          longDesc={v.longDesc}
+          shortDesc={v.shortDesc}
+          responsibilities={v.responsibilities}
+          accomplishments={v.accomplishments}
+          skills={v.skills}
+          technologies={v.technologies}
+        />
+      );
+    });
+    // FIXME
+    // ownerGigs.contracts = contractGigObjects;
+    let ownerExperience = ownerGigs.map((v, i) => {
+      // TODO if there are ever any extra companies I own, I'll have to redo this filter
+      let company = props.myData.companies.find((c) => {
+        return c._id === v.companyId;
+      });
+      return (
+        <Gig
+          _id={v._id}
+          verbosity={state.verbosity * 2}
+          key={v._id}
+          gigType={v.gigType}
+          title={v.title}
+          showlocation={state.showlocation}
+          location={v.location}
+          companyId={v.companyId}
+          company={company.fullname}
+          endDate={v.endDate}
+          startDate={v.startDate}
+          longDesc={v.longDesc}
+          shortDesc={v.shortDesc}
+          contracts={contractGigObjects}
+          responsibilities={v.responsibilities}
+          accomplishments={v.accomplishments}
+          skills={v.skills}
+          technologies={v.technologies}
+        />
+      );
+    });
+    let employeeExperience = employeeGigs.map((v, i) => {
+      let company = props.myData.companies.find((c) => {
+        return c._id === v.companyId;
+      });
+      return (
+        <Gig
+          _id={v._id}
+          verbosity={state.verbosity}
+          key={v._id}
+          gigType={v.gigType}
+          title={v.title}
+          showlocation={state.showlocation}
+          location={v.location}
+          companyId={v.companyId}
+          company={company.fullname}
+          endDate={v.endDate}
+          startDate={v.startDate}
+          longDesc={v.longDesc}
+          shortDesc={v.shortDesc}
+          responsibilities={v.responsibilities}
+          accomplishments={v.accomplishments}
+          skills={v.skills}
+        />
+      );
+    });
+    if ("Fulltime First" === state.sequence) {
+      experience = [employeeExperience, ownerExperience];
+    } else {
+      experience = [ownerExperience, employeeExperience];
+    }
+  }
 
   // TODO: filter by date depending on verbosity request
   const recommendations = props.myData.recommendations
-    .filter((v, i) => i < state.verbosity / 2)
+    .filter((v, i) => i < state.recommendations)
     .map((v, i) => {
       return (
         <Recommendation
@@ -130,7 +218,7 @@ function Resume(props) {
   // TODO: filter by tier from state, group by category, by experience depending on verbosity request
   const skills = props.myData.skills
     .filter(filterSkillsbyPriority)
-    // .filter(filterSkillsByTier)
+    .filter(filterSkillsByTier)
     .sort(sortSkillsByPriority)
     .map((v, i) => {
       return (
