@@ -93,7 +93,7 @@ function LayoutA(props) {
       <h4>Introduction</h4>
       <header>{props.intro}</header>
       <h4>Skills</h4>
-      <ul className="ul-skills layout-c">{props.skills}</ul>
+      <ul className="ul-skills layout-a">{props.skills}</ul>
       <h4>Experience</h4>
       {props.experience}
 
@@ -112,9 +112,11 @@ function LayoutA(props) {
  * ?Assessments?
  * Recommendations
  * Print-Only Footer
+ *
  * @param {} props
  */
 function LayoutB(props) {
+  // no, layout B does not actually differ from layout A. So far.
   return (
     <>
       <header className="h-card">
@@ -122,7 +124,7 @@ function LayoutB(props) {
       </header>
       <header>{props.intro}</header>
       <h4>Skills</h4>
-      <ul className="ul-skills layout-c">{props.skills}</ul>
+      <ul className="ul-skills layout-a">{props.skills}</ul>
 
       <h4>Experience</h4>
       {props.gigs}

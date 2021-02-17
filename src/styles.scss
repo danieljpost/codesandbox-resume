@@ -27,7 +27,7 @@ blockquote {
   color: $colorDefault;
   margin: 0;
 }
-ul.ul-skills.layout-c {
+ul.ul-skills.layout-a {
   display: flex;
   /* flex-direction: column; */
   flex-wrap: wrap;
@@ -43,7 +43,7 @@ ul:after {
   display: table;
   clear: both;
 }
-ul.ul-skills.layout-c li {
+ul.ul-skills.layout-a li {
   padding: 0 0.2rem 0.2rem 0;
   font-size: 0.8rem;
   flex: 1 1 8rem;

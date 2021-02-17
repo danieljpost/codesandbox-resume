@@ -110,32 +110,35 @@ function Resume(props) {
       );
     });
   } else {
-    let contractGigObjects = contractGigs.map((v, i) => {
-      let company = props.myData.companies.find((c) => {
-        return c._id === v.companyId;
+    let contractGigObjects = contractGigs
+      .filter((g, i) => g.relevance > 8 - state.verbosity)
+      .sort(sortGigsByDate)
+      .map((v, i) => {
+        let company = props.myData.companies.find((c) => {
+          return c._id === v.companyId;
+        });
+        return (
+          <Gig
+            _id={v._id}
+            verbosity={state.verbosity / 2}
+            key={v._id}
+            gigType={v.gigType}
+            title={v.title}
+            showlocation={state.showlocation}
+            location={v.location}
+            companyId={v.companyId}
+            company={company.fullname}
+            endDate={v.endDate}
+            startDate={v.startDate}
+            longDesc={v.longDesc}
+            shortDesc={v.shortDesc}
+            responsibilities={v.responsibilities}
+            accomplishments={v.accomplishments}
+            skills={v.skills}
+            technologies={v.technologies}
+          />
+        );
       });
-      return (
-        <Gig
-          _id={v._id}
-          verbosity={state.verbosity / 2}
-          key={v._id}
-          gigType={v.gigType}
-          title={v.title}
-          showlocation={state.showlocation}
-          location={v.location}
-          companyId={v.companyId}
-          company={company.fullname}
-          endDate={v.endDate}
-          startDate={v.startDate}
-          longDesc={v.longDesc}
-          shortDesc={v.shortDesc}
-          responsibilities={v.responsibilities}
-          accomplishments={v.accomplishments}
-          skills={v.skills}
-          technologies={v.technologies}
-        />
-      );
-    });
     // FIXME
     // ownerGigs.contracts = contractGigObjects;
     let ownerExperience = ownerGigs.map((v, i) => {
@@ -166,7 +169,7 @@ function Resume(props) {
         />
       );
     });
-    let employeeExperience = employeeGigs.map((v, i) => {
+    let employeeExperience = employeeGigs.sort(sortGigsByDate).map((v, i) => {
       let company = props.myData.companies.find((c) => {
         return c._id === v.companyId;
       });
@@ -188,6 +191,7 @@ function Resume(props) {
           responsibilities={v.responsibilities}
           accomplishments={v.accomplishments}
           skills={v.skills}
+          technologies={v.technologies}
         />
       );
     });
@@ -198,7 +202,8 @@ function Resume(props) {
     }
   }
 
-  // TODO: filter by date depending on verbosity request
+  // number of recommendations shown is directly controlled
+  // by a state value, recommendations
   const recommendations = props.myData.recommendations
     .filter((v, i) => i < state.recommendations)
     .map((v, i) => {
