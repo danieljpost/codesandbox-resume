@@ -63,7 +63,6 @@ function ContractGig(props) {
   // TODO: at max verbosity (>=90%) also show which skills are used
   const location =
     props.location && props.showlocation ? " (" + props.location + ")" : "";
-  const title = props.type === "contract" ? "" : props.title + ", ";
   const maxResponsibilities = props.verbosity / 2;
   const maxAccomplishments = props.verbosity / 2;
   const accomplishments = props.accomplishments
@@ -119,7 +118,7 @@ function OwnerGig(props) {
   let skillsUsed = "";
   if (props.skillsUsed.length) {
     let someSkills = props.skillsUsed.join(", ");
-    skillsUsed = <div>Toolses used: {someSkills}</div>;
+    skillsUsed = <div>Tools used: {someSkills}</div>;
   }
   return (
     <section className="gig ownerGig">

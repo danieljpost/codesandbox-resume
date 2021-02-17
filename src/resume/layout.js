@@ -6,20 +6,21 @@ function Layout(props) {
     if (false) {
       return props.state.toJsonPrettyPrinted();
     }
+    let state = props.state;
     return (
       <>
         <hr />
         <aside id="as-configured">
-          <pre>Downloaded from {props.state.magicUrl}</pre>
-          <pre>Tier: {props.state.jobTier}</pre>
-          <pre>Layout: {props.state.layout}</pre>
-          <pre>Verbosity: {props.state.verbosity}</pre>
-          <pre>chronology: {props.state.chronology}</pre>
-          <pre>Sequence: {props.state.sequence}</pre>
-          <pre>Recommendations: {props.state.recommendations}</pre>
-          <pre>skillsMinPriority: {props.state.skillsMinPriority}</pre>
-          <pre>Dark Mode: {props.state.darkmode ? "on" : "off"}</pre>
-          <pre>Show Location: {props.state.showlocation ? "on" : "off"}</pre>
+          <pre>Downloaded from {state.magicUrl}</pre>
+          <pre>Tier: {state.jobTier}</pre>
+          {/* <pre>Layout: {state.layout}</pre> */}
+          <pre>Verbosity: {state.verbosity}</pre>
+          <pre>Chronology: {state.chronology}</pre>
+          <pre>Sequence: {state.sequence}</pre>
+          <pre>Recommendations: {state.recommendations}</pre>
+          <pre>Skills Verbosity: {state.skillsVerbosity}</pre>
+          <pre>Dark Mode: {state.darkmode ? "on" : "off"}</pre>
+          <pre>Show Location: {state.showlocation ? "on" : "off"}</pre>
         </aside>
       </>
     );

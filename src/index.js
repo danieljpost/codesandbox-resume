@@ -16,21 +16,18 @@ if (isSmallScreen) {
 }
 
 const resumeElement = document.getElementById("resume");
-// TODO:
-// - connect this to global "state"
-// - pass state on to all child components
 const configDefaults = {
   darkmode: "on" === localStorage.getItem("dark-mode-preference"),
-  verbosity: 8,
-  recommendations: 10,
+  verbosity: 6,
+  recommendations: 6,
   chronology: "Hybrid",
   sequence: "Contracts First",
   sequenceOptions: ["Contracts First", "Fulltime First"],
   showRecommendations: true,
   layout: "A",
-  skillsMinPriority: 3,
-  skillsMinExpertise: 5,
-  jobTier: "Front End",
+  skillsShown: 3,
+  skillsVerbosity: 5,
+  jobTier: "User Interface",
   jobTierOptions: [
     "DevOps",
     "Back End",

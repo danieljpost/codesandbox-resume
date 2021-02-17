@@ -1,7 +1,7 @@
 import React from "react";
 
 import Button from "@material-ui/core/Button";
-import FormRow from "@material-ui/core/Grid";
+// import FormRow from "@material-ui/core/Grid";
 import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -67,7 +67,7 @@ export default function Configurator(props) {
           </FormControl>
         </Grid>
 
-        <Grid item xs={2}>
+        {/* <Grid item xs={2}>
           <FormControl>
             <InputLabel htmlFor="tier-native-helper">Layout</InputLabel>
             <NativeSelect
@@ -87,7 +87,7 @@ export default function Configurator(props) {
             </NativeSelect>
           </FormControl>
         </Grid>
-
+ */}
         <Grid item xs={6}>
           <FormControl>
             <InputLabel htmlFor="chronology-native-helper">
@@ -152,15 +152,15 @@ export default function Configurator(props) {
 
         <Grid item xs>
           <FormControl>
-            <label htmlFor="verbosityinput">Skills Min Priority: </label>
+            <label htmlFor="verbosityinput">Skills Verbosity: </label>
             <input
-              id="skillsMinPriority"
+              id="skillsShown"
               type="range"
-              name="skillsMinPriority"
+              name="skillsShown"
               color="primary"
-              value={props.state.skillsMinPriority}
+              value={props.state.skillsShown}
               min="2"
-              max="6"
+              max="8"
               step="1"
               onChange={props.handleChange}
             ></input>

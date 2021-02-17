@@ -39,8 +39,19 @@ function Resume(props) {
     </div>
   );
 
-  // Gig filtering is done here, now but may be moved to the Layout in the future
-  const sortSkillsByPriority = (a, b) => {
+  // precalculate and memoize blurbs for all skills
+  let allSkills = props.myData.skills;
+  let allBlurbs = {};
+  allSkills.forEach((v, i) => {
+    allBlurbs[v.sname] = (
+      <span key={i} props={v}>
+        {v.name}
+      </span>
+    );
+  });
+
+  // Gig filtering is done here
+  const sortSkillsByRelevance = (a, b) => {
     if (a.expertise > b.expertise) {
       return -1;
     }
@@ -53,8 +64,8 @@ function Resume(props) {
   const filterSkillsByTier = (skill) => {
     return skill.tiers.includes(state.jobTier);
   };
-  const filterSkillsbyPriority = (skill) => {
-    return skill.priority >= state.skillsMinPriority;
+  const filterSkillsbyRelevance = (skill) => {
+    return skill.relevance >= 10 - state.skillsShown;
   };
 
   // const skillCategories = props.myData.skills.map((v, i) => v.category);
@@ -104,7 +115,6 @@ function Resume(props) {
           shortDesc={v.shortDesc}
           responsibilities={v.responsibilities}
           accomplishments={v.accomplishments}
-          skills={v.skills}
           technologies={v.technologies}
         />
       );
@@ -120,8 +130,10 @@ function Resume(props) {
         return (
           <Gig
             _id={v._id}
-            verbosity={state.verbosity / 2}
+            verbosity={state.verbosity}
             key={v._id}
+            // data={v}
+            // state={state}
             gigType={v.gigType}
             title={v.title}
             showlocation={state.showlocation}
@@ -134,8 +146,8 @@ function Resume(props) {
             shortDesc={v.shortDesc}
             responsibilities={v.responsibilities}
             accomplishments={v.accomplishments}
-            skills={v.skills}
             technologies={v.technologies}
+            blurbs={allBlurbs}
           />
         );
       });
@@ -164,8 +176,8 @@ function Resume(props) {
           contracts={contractGigObjects}
           responsibilities={v.responsibilities}
           accomplishments={v.accomplishments}
-          skills={v.skills}
           technologies={v.technologies}
+          blurbs={allBlurbs}
         />
       );
     });
@@ -192,6 +204,7 @@ function Resume(props) {
           accomplishments={v.accomplishments}
           skills={v.skills}
           technologies={v.technologies}
+          blurbs={allBlurbs}
         />
       );
     });
@@ -222,9 +235,9 @@ function Resume(props) {
 
   // TODO: filter by tier from state, group by category, by experience depending on verbosity request
   const skills = props.myData.skills
-    .filter(filterSkillsbyPriority)
+    .filter(filterSkillsbyRelevance)
     .filter(filterSkillsByTier)
-    .sort(sortSkillsByPriority)
+    .sort(sortSkillsByRelevance)
     .map((v, i) => {
       return (
         <Skill
