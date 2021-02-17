@@ -13,7 +13,7 @@ import Switch from "@material-ui/core/Switch";
  * TODO:
  * - hamburger menu the configurator
  * - minimize the configurator
- * - configurator disappears in print view
+ * [x] configurator disappears in print view
  */
 
 export default function Configurator(props) {
@@ -143,7 +143,7 @@ export default function Configurator(props) {
               color="primary"
               value={props.state.recommendations}
               min="0"
-              max="10"
+              max="14"
               step="1"
               onChange={props.handleChange}
             ></input>

@@ -218,6 +218,15 @@ function Resume(props) {
   // number of recommendations shown is directly controlled
   // by a state value, recommendations
   const recommendations = props.myData.recommendations
+    .sort((a, b) => {
+      if (a.when > b.when) {
+        return -1;
+      }
+      if (a.when < b.when) {
+        return 1;
+      }
+      return 0;
+    })
     .filter((v, i) => i < state.recommendations)
     .map((v, i) => {
       return (

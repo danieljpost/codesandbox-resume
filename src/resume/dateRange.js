@@ -23,7 +23,6 @@ function DateRange(props) {
       return "Present";
     }
     const match = d.match(regexpYmd);
-    // console.log(d, match); return "foo";
     const month = months[match[2]];
     const year = match[1];
     return `${month} ${year}`;
