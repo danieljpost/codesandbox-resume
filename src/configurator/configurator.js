@@ -143,7 +143,7 @@ export default function Configurator(props) {
               color="primary"
               value={props.state.recommendations}
               min="0"
-              max="20"
+              max="10"
               step="1"
               onChange={props.handleChange}
             ></input>
