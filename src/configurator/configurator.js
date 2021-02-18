@@ -118,7 +118,9 @@ export default function Configurator(props) {
       <Grid container>
         <Grid item xs>
           <FormControl>
-            <label htmlFor="verbosityinput">Verbosity: </label>
+            <label htmlFor="verbosityinput">
+              Jobs Verbosity: {props.state.verbosity}
+            </label>
             <input
               id="verbosityinput"
               type="range"
@@ -126,8 +128,8 @@ export default function Configurator(props) {
               color="primary"
               value={props.state.verbosity}
               min="1"
-              max="10"
-              step="1"
+              max="11"
+              step=".5"
               onChange={props.handleChange}
             ></input>
           </FormControl>
@@ -135,7 +137,9 @@ export default function Configurator(props) {
 
         <Grid item xs>
           <FormControl>
-            <label htmlFor="recommendationsinput">Recommendations: </label>
+            <label htmlFor="recommendationsinput">
+              Recommendations: {props.state.recommendations}
+            </label>
             <input
               id="recommendationsinput"
               type="range"
@@ -143,7 +147,7 @@ export default function Configurator(props) {
               color="primary"
               value={props.state.recommendations}
               min="0"
-              max="14"
+              max="11"
               step="1"
               onChange={props.handleChange}
             ></input>
@@ -152,7 +156,9 @@ export default function Configurator(props) {
 
         <Grid item xs>
           <FormControl>
-            <label htmlFor="verbosityinput">Skills Verbosity: </label>
+            <label htmlFor="verbosityinput">
+              Skills Verbosity: {props.state.skillsShown}
+            </label>
             <input
               id="skillsShown"
               type="range"
@@ -160,7 +166,7 @@ export default function Configurator(props) {
               color="primary"
               value={props.state.skillsShown}
               min="2"
-              max="8"
+              max="11"
               step="1"
               onChange={props.handleChange}
             ></input>

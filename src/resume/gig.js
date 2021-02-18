@@ -80,14 +80,20 @@ function ContractGig(props) {
     let someSkills = props.skillsUsed.join(", ");
     skillsUsed = <div>Skills used: {someSkills}</div>;
   }
+  let dateRange = null;
+  if (props.verbosity > 2.5) {
+    dateRange = (
+      <DateRange startDate={props.startDate} endDate={props.endDate} />
+    );
+  }
 
   return (
     <article className="gig contractGig">
       {/* <legend className={props.gigType}>{props.gigType}</legend> */}
       <header>
+        {dateRange}
         {props.company}
         &nbsp;
-        <DateRange startDate={props.startDate} endDate={props.endDate} />
         {location}
       </header>
 

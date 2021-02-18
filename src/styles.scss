@@ -6,7 +6,7 @@ $backgroundColorDark: #334;
 
 #root {
   background-color: $backgroundColorDefault;
-  font-family: sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   /* font-size: 1rem; */
 }
 #root a {
@@ -20,10 +20,11 @@ $backgroundColorDark: #334;
 //  color: blue;
 // }
 .gig {
-  outline: 0px dashed green;
+  outline: 1px dashed green;
 }
 blockquote {
-  font-family: serif;
+  font-family: 'Ubuntu',sans-serif;
+  font-style: italic;
   color: $colorDefault;
   margin: 0;
 }
@@ -44,9 +45,10 @@ ul:after {
   clear: both;
 }
 ul.ul-skills.layout-a li {
+  font-family: 'Oxygen Mono', sans-serif;
   padding: 0 0.2rem 0.2rem 0;
   font-size: 0.8rem;
-  flex: 1 1 8rem;
+  flex: 1 1 8em;
   border: 0px dashed red;
 }
 header:first-of-type {
@@ -55,7 +57,8 @@ header:first-of-type {
   align-items: stretch;
 }
 header:first-of-type > div {
-  flex: 1;
+  outline: 0px dashed violet;
+  flex: 1 1 30em;
 }
 article.gig {
   margin: 1em 0;
@@ -87,6 +90,7 @@ span.date.right {
 }
 .gig.contractGig {
   font-size: .9em;
+  font-weight: 100;
 }
 .ownerGig {
   position: relative;
