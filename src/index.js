@@ -63,7 +63,7 @@ let reset = function () {
 // might become a two-fetch situation to fetch
 // - the standard JSON
 // - the rest
-let kvetch = fetch("https://danieljpost.pro/resume.json");
+let kvetch = fetch("https://danieljpost.pro/v1/resume.json");
 kvetch
   .then((response) => response.json())
   .then((data) => {
