@@ -1,8 +1,12 @@
 import React from "react";
 import { render } from "react-dom";
 import Resume from "./resume/resume";
-
+import dotenv from "dotenv";
 import "./styles.scss";
+const result = dotenv.config();
+if (result.error) {
+  throw result.error;
+}
 
 const isSmallScreen =
   window.screen && Math.max(window.screen.width, window.screen.height) < 900;
@@ -14,6 +18,9 @@ if (isSmallScreen) {
     localStorage.setItem("dark-mode-preference", "on");
   }
 }
+
+// testing that dotenv is working
+render(JSON.stringify(process.env), document.getElementById("env"));
 
 const resumeElement = document.getElementById("resume");
 const configDefaults = {

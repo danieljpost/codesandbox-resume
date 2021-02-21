@@ -6,8 +6,8 @@ $backgroundColorDark: #334;
 
 #root {
   background-color: $backgroundColorDefault;
-  font-family: 'Ubuntu', sans-serif;
-  /* font-size: 1rem; */
+  font-family: 'Dyslexie Regular', 'Ubuntu', sans-serif;
+  font-size: 1rem;
 }
 #root a {
   color: $colorDefault;
@@ -23,7 +23,7 @@ $backgroundColorDark: #334;
   outline: 1px dashed green;
 }
 blockquote {
-  font-family: 'Ubuntu',sans-serif;
+  font-family: 'Dyslexie Regular', 'Ubuntu',sans-serif;
   font-style: italic;
   color: $colorDefault;
   margin: 0;
