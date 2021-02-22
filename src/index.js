@@ -1,9 +1,11 @@
 import React from "react";
 import { render } from "react-dom";
 import Resume from "./resume/resume";
+import dotenv from "dotenv";
 
 import "./styles.scss";
 
+dotenv.config();
 const isSmallScreen =
   window.screen && Math.max(window.screen.width, window.screen.height) < 900;
 
@@ -50,6 +52,56 @@ let reset = function () {
   window.document.location.reload();
 };
 
+window.ShowLoading = true;
+// Stupid JavaScript Tricks:
+{
+  let loadingMessages = process.env.loadingMessages.split(",");
+  window.loadingMessages = loadingMessages;
+  let zinger = document.getElementById("zinger");
+  let giggle = function () {
+    let i = 0;
+    return async (ms, j, msg) => {
+      if (window.ShowLoading) {
+        i++;
+        render(
+          <>
+            <span className="dbg" key={i}>
+              {j}
+            </span>
+            {msg}...
+          </>,
+          zinger
+        );
+      } else {
+        // console.log(arguments);
+      }
+    };
+  };
+  let wut = giggle();
+
+  async function makeapromise(milliseconds, sequenceid, message) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(() => true);
+      }, milliseconds);
+    }).then(() => wut(milliseconds, sequenceid, message));
+  }
+
+  async function go() {
+    let c = () => {};
+    for (let i = 0; i < 20; i++) {
+      let which = Math.floor(
+        Math.random() * Math.floor(loadingMessages.length)
+      );
+      let loadingText = loadingMessages[which];
+      let ms = Math.floor(Math.random() * 200);
+      // intentionally not using await below.
+      makeapromise(ms, i, loadingText).catch(c);
+    }
+  }
+  go();
+}
+
 // TODO: if there's a pathname element to window.location
 // - try to fetch the configuration from the backend,
 //   merge with defaults before rendering anything
@@ -66,6 +118,15 @@ let reset = function () {
 let kvetch = fetch("https://danieljpost.pro/v1/resume.json");
 kvetch
   .then((response) => response.json())
+  .then(
+    (data) =>
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          window.ShowLoadingading = false;
+          resolve(data);
+        }, process.env.latency);
+      })
+  )
   .then((data) => {
     render(
       <Resume reset={reset} config={configState} myData={data} />,

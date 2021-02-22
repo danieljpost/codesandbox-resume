@@ -56,13 +56,13 @@
         width: 1em;
       }
       .swing div:first-of-type {
-        background: linear-gradient(to left, #fbb 0%, #800 100%);
+        background: radial-gradient(circle at top, #fbb 0%, #800 50%);
       }
       .swing div {
-        background: linear-gradient(to bottom, #bfb 0%, #080 100%);
+        background: radial-gradient(circle at top, #bfb 0%, #080 50%);
       }
       .swing div:last-of-type {
-        background: linear-gradient(to right, #bbf 0%, #008 100%);
+        background: radial-gradient(circle at top, #bbf 0%, #008 50%);
       }
       .shadow {
         clear: left;
@@ -137,6 +137,13 @@
       .shadow-r {
         animation: shadow-r-n 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19)
           infinite alternate;
+      }
+
+      #root {
+        font-family: "Ubuntu", sans-serif;
+      }
+      #zinger > span.dbg {
+        display: none;
       }
 
       /* cyrillic-ext */
@@ -235,19 +242,25 @@
     </noscript>
     <div id="root">
       <div id="resume">
+        <span id="zinger"><span>Loading...</span></span>
         <div
           aria-busy="true"
           aria-label="Loading..."
           role="progressbar"
           class="container"
+          style="outline: 0px solid black;"
         >
           <div class="swing">
             <div class="swing-l"></div>
+            <div></div>
+            <div></div>
             <div></div>
             <div class="swing-r"></div>
           </div>
           <div class="shadow">
             <div class="shadow-l"></div>
+            <div></div>
+            <div></div>
             <div></div>
             <div class="shadow-r"></div>
           </div>
