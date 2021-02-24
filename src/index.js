@@ -63,6 +63,7 @@ window.ShowLoading = true;
     return async (ms, j, msg) => {
       if (window.ShowLoading) {
         i++;
+        // console.log(i, ms, j, msg);
         render(
           <>
             <span className="dbg" key={i}>
@@ -94,7 +95,7 @@ window.ShowLoading = true;
         Math.random() * Math.floor(loadingMessages.length)
       );
       let loadingText = loadingMessages[which];
-      let ms = Math.floor(Math.random() * 200);
+      let ms = Math.floor(Math.random() * 10000.0);
       // intentionally not using await below.
       makeapromise(ms, i, loadingText).catch(c);
     }
