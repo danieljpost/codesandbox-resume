@@ -123,7 +123,7 @@ kvetch
     (data) =>
       new Promise((resolve, reject) => {
         setTimeout(() => {
-          window.ShowLoadingading = false;
+          window.ShowLoading = false;
           resolve(data);
         }, process.env.latency);
       })
