@@ -1,4 +1,4 @@
-import React from "react";
+import { StrictMode, React } from "react";
 import { render } from "react-dom";
 import Resume from "./resume/resume";
 import dotenv from "dotenv";
@@ -130,7 +130,9 @@ kvetch
   )
   .then((data) => {
     render(
-      <Resume reset={reset} config={configState} myData={data} />,
+      <StrictMode>
+        <Resume reset={reset} config={configState} myData={data} />
+      </StrictMode>,
       resumeElement
     );
   });
