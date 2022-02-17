@@ -20,7 +20,7 @@ $backgroundColorDark: #334;
 //  color: blue;
 // }
 .gig {
-  outline: 1px dashed green;
+  // outline: 1px dashed green;
 }
 blockquote {
   font-family: 'Ubuntu',sans-serif;
@@ -57,7 +57,7 @@ header:first-of-type {
   align-items: stretch;
 }
 header:first-of-type > div {
-  outline: 0px dashed violet;
+  // outline: 0px dashed violet;
   flex: 1 1 30em;
 }
 article.gig {
@@ -85,7 +85,7 @@ span.date.right {
   background-color: #cce;
 }
 .gig .contract {
-  color: #4a4;
+  // color: #4a4;
   background-color: #cec;
 }
 .gig.contractGig {
@@ -94,7 +94,7 @@ span.date.right {
 }
 .ownerGig {
   position: relative;
-  background-color: rgba(0,0,0,.4);
+  // background-color: rgba(0,0,0,.4);
   margin: 20px -20px;
   padding: 10px 20px;
 }
@@ -140,7 +140,7 @@ section {
 }
 
 #configurator {
-  background-color: rgba(255,255,255,.3);
+  // background-color: rgba(255,255,255,.3);
   margin: -10px;
   margin-bottom: 20px;
   padding: 10px;
