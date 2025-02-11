@@ -163,8 +163,9 @@ section {
     visibility: hidden;
   }
   #as-configured {
-    display: inline-block;
-    visibility: visible;
+    display: none;
+    // display: inline-block;
+    // visibility: visible;
   }
 }
 aside.recommendation {
