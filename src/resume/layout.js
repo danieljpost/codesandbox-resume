@@ -20,6 +20,7 @@ function Layout(props) {
           <pre>Recommendations: {state.recommendations}</pre>
           <pre>Skills Verbosity: {state.skillsVerbosity}</pre>
           <pre>Dark Mode: {state.darkmode ? "on" : "off"}</pre>
+          <pre>Show Clients: {state.showContractClients ? "on" : "off"}</pre>
           <pre>Show Location: {state.showlocation ? "on" : "off"}</pre>
         </aside>
       </>
