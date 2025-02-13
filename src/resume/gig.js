@@ -84,7 +84,7 @@ function ContractGig(props) {
   let company = "";
   let contractGigHeader = null;
   // TODO: just for shits, make this a ContractGigHeader object
-  if (props.verbosity > 4) {
+  if (props.showContractClients) {
     company = <div>{props.company}&nbsp;{location}</div>
   }
   if (props.verbosity > 3 || props.verbosity < 2) {

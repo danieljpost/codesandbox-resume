@@ -200,6 +200,24 @@ export default function Configurator(props) {
               value="does this matter"
               control={
                 <Switch
+                  name="showContractClients"
+                  value="dark"
+                  checked={props.state.showContractClients}
+                  onChange={props.handleChangeCheck}
+                  color="primary"
+                />
+              }
+              label="Show Contract Clients"
+              labelPlacement="start"
+            />
+          </FormControl>
+        </Grid>
+        <Grid item xs>
+          <FormControl>
+            <FormControlLabel
+              value="does this matter"
+              control={
+                <Switch
                   name="showlocation"
                   value="dark"
                   checked={props.state.showlocation}

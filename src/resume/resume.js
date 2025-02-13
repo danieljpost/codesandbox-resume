@@ -106,6 +106,7 @@ function Resume(props) {
           gigType={v.gigType}
           title={v.title}
           showlocation={state.showlocation}
+          showContractClients={state.showContractClients}
           location={v.location}
           companyId={v.companyId}
           company={company.fullname}
@@ -137,6 +138,7 @@ function Resume(props) {
             gigType={v.gigType}
             title={v.title}
             showlocation={state.showlocation}
+            showContractClients={state.showContractClients}
             location={v.location}
             companyId={v.companyId}
             company={company.fullname}
@@ -166,6 +168,7 @@ function Resume(props) {
           gigType={v.gigType}
           title={v.title}
           showlocation={state.showlocation}
+          showContractClients={state.showContractClients}
           location={v.location}
           companyId={v.companyId}
           company={company.fullname}
@@ -193,6 +196,7 @@ function Resume(props) {
           gigType={v.gigType}
           title={v.title}
           showlocation={state.showlocation}
+          showContractClients={state.showContractClients}
           location={v.location}
           companyId={v.companyId}
           company={company.fullname}
