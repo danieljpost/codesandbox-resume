@@ -3,11 +3,13 @@ $colorDark: #ddd;
 $colorDark2: #eef;
 $backgroundColorDefault: #fff;
 $backgroundColorDark: #334;
+$fontFamily: "Ubuntu";
+$fontMonospace: "Ubuntu Monospace";
 
 #root {
-  background-color: $backgroundColorDefault;
-  font-family: 'Ubuntu', sans-serif;
-  /* font-size: 1rem; */
+  color: light-dark($colorDefault, $colorDark);
+  background-color: light-dark($backgroundColorDefault, $backgroundColorDark);
+  font-family: $fontFamily, sans-serif;
 }
 
 #root a {
@@ -19,18 +21,15 @@ $backgroundColorDark: #334;
   margin: 1em 0;
 }
 
-// .recommendation label {
-//  color: blue;
-// }
 .gig {
   // outline: 1px dashed green;
 }
 
 blockquote {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: $fontFamily, sans-serif;
   font-style: italic;
-  color: light-dark($colorDefault, $colorDark2);
-  background-color: light-dark($colorDark2, $colorDefault);
+  color: light-dark($colorDefault, $colorDark);
+  background-color: light-dark($colorDark, $colorDefault);
   margin: 0;
 }
 
@@ -53,7 +52,7 @@ ul:after {
 }
 
 ul.ul-skills.layout-a li {
-  font-family: 'Oxygen Mono', sans-serif;
+  font-family: $fontMonospace, sans-serif;
   padding: 0 0.2rem 0.2rem 0;
   font-size: 0.8rem;
   flex: 1 1 8em;
@@ -82,7 +81,6 @@ article.gig {
 span.date.right {
   position: absolute;
   right: 0;
-
 }
 
 .gig legend {
@@ -106,7 +104,7 @@ span.date.right {
 }
 
 .gig.contractGig {
-  font-size: .9em;
+  font-size: 0.9em;
   font-weight: 100;
 }
 
@@ -153,7 +151,8 @@ main {
 }
 
 .recommendation {
-  background-color: light-dark(rgba(255, 255, 255, .25), rgba(255, 255, 255, .25));
+  background-color: light-dark(rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.25));
   padding: 20px;
   margin: 0 -20px;
   break-after: auto;
@@ -173,11 +172,10 @@ section {
 }
 
 #as-configured {
-  line-height: .4em;
+  line-height: 0.4em;
   //   // display: none;
   //   // visibility: hidden;
 }
-
 
 /********/
 
