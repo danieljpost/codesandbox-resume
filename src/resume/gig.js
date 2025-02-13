@@ -85,7 +85,7 @@ function ContractGig(props) {
   let contractGigHeader = null;
   // TODO: just for shits, make this a ContractGigHeader object
   if (props.verbosity > 4) {
-    company = <div>props.company&nbsp;location</div>
+    company = <div>{props.company}&nbsp;{location}</div>
   }
   if (props.verbosity > 3 || props.verbosity < 2) {
     dateRange = (
