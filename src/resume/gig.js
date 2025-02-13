@@ -97,12 +97,10 @@ function ContractGig(props) {
       <header>
         {dateRange}
         {company}
-        &nbsp;
-        {location}
       </header>
 
       {accomplishments}
-      {responsibilities}
+      {/* {responsibilities} */}
       {skillsUsed}
     </article>
   );
