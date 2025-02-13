@@ -93,8 +93,8 @@ function ContractGig(props) {
 
   return (
     <article className="gig contractGig">
-      {/* <legend className={props.gigType}>{props.gigType}</legend> */}
       <header>
+        Contract!
         {dateRange}
         {company}
       </header>
