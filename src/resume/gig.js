@@ -76,11 +76,15 @@ function ContractGig(props) {
       .map((a, i) => <div key={i}>{a}</div>);
 
   let skillsUsed = "";
-  if (props.skillsUsed.length) {
+  if (props.verbosity > 8 && props.skillsUsed.length) {
     let someSkills = props.skillsUsed.join(", ");
     skillsUsed = <div>Skills used: {someSkills}</div>;
   }
   let dateRange = null;
+  let company = "";
+  if (props.verbosity > 6) {
+    company = <div>props.company&nbsp;location</div>
+  }
   if (props.verbosity > 2.5) {
     dateRange = (
       <DateRange startDate={props.startDate} endDate={props.endDate} />
@@ -92,7 +96,7 @@ function ContractGig(props) {
       {/* <legend className={props.gigType}>{props.gigType}</legend> */}
       <header>
         {dateRange}
-        {props.company}
+        {company}
         &nbsp;
         {location}
       </header>
@@ -109,7 +113,7 @@ function OwnerGig(props) {
   const location =
     props.location && props.showlocation ? " (" + props.location + ")" : "";
   const title = props.type === "contract" ? "" : props.title + ", ";
-  const maxResponsibilities = props.verbosity / 2;
+  const maxResponsibilities = props.verbosity;
   const maxAccomplishments = props.verbosity / 2;
   const accomplishments = props.accomplishments
     .filter((v, i) => i < maxAccomplishments)
@@ -122,7 +126,7 @@ function OwnerGig(props) {
       .map((a, i) => <div key={i}>{a}</div>);
 
   let skillsUsed = "";
-  if (props.skillsUsed.length) {
+  if (props.verbosity > 9 && props.skillsUsed.length) {
     let someSkills = props.skillsUsed.join(", ");
     skillsUsed = <div>Tools used: {someSkills}</div>;
   }
