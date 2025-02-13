@@ -82,22 +82,21 @@ function ContractGig(props) {
   }
   let dateRange = null;
   let company = "";
-  if (props.verbosity > 6) {
+  let contractGigHeader = null;
+  // TODO: just for shits, make this a ContractGigHeader object
+  if (props.verbosity > 4) {
     company = <div>props.company&nbsp;location</div>
   }
-  if (props.verbosity > 2.5) {
+  if (props.verbosity > 3 || props.verbosity < 2) {
     dateRange = (
       <DateRange startDate={props.startDate} endDate={props.endDate} />
     );
   }
+  contractGigHeader = <header>{dateRange}{company}</header>
 
   return (
     <article className="gig contractGig">
-      <header>
-        Contract!
-        {dateRange}
-        {company}
-      </header>
+      {contractGigHeader}
 
       {accomplishments}
       {/* {responsibilities} */}
