@@ -9,25 +9,31 @@ $backgroundColorDark: #334;
   font-family: 'Ubuntu', sans-serif;
   /* font-size: 1rem; */
 }
+
 #root a {
   color: $colorDefault;
   text-decoration: none;
 }
+
 .recommendation {
   margin: 1em 0;
 }
+
 // .recommendation label {
 //  color: blue;
 // }
 .gig {
   // outline: 1px dashed green;
 }
+
 blockquote {
-  font-family: 'Ubuntu',sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-style: italic;
-  color: $colorDefault;
+  color: light-dark($colorDefault, $colorDark2);
+  background-color: light-dark($colorDark2, $colorDefault);
   margin: 0;
 }
+
 ul.ul-skills.layout-a {
   display: flex;
   /* flex-direction: column; */
@@ -38,12 +44,14 @@ ul.ul-skills.layout-a {
   break-after: always;
   clear: both;
 }
+
 /* clearfix */
 ul:after {
   content: "";
   display: table;
   clear: both;
 }
+
 ul.ul-skills.layout-a li {
   font-family: 'Oxygen Mono', sans-serif;
   padding: 0 0.2rem 0.2rem 0;
@@ -51,26 +59,32 @@ ul.ul-skills.layout-a li {
   flex: 1 1 8em;
   border: 0px dashed red;
 }
+
 header:first-of-type {
   display: flex;
   flex-direction: row;
   align-items: stretch;
 }
-header:first-of-type > div {
+
+header:first-of-type>div {
   // outline: 0px dashed violet;
   flex: 1 1 30em;
 }
+
 article.gig {
   margin: 1em 0;
 }
-.gig > header {
+
+.gig>header {
   position: relative;
 }
+
 span.date.right {
   position: absolute;
   right: 0;
 
 }
+
 .gig legend {
   top: -15px;
   margin: 0;
@@ -80,60 +94,72 @@ span.date.right {
   transform: rotate(12deg);
   padding: 0.1em 0.4em;
 }
+
 .gig .employee {
   color: #44a;
   background-color: #cce;
 }
+
 .gig .contract {
   // color: #4a4;
   background-color: #cec;
 }
+
 .gig.contractGig {
   font-size: .9em;
   font-weight: 100;
 }
+
 .ownerGig {
   position: relative;
   // background-color: rgba(0,0,0,.4);
   margin: 20px -20px;
   padding: 10px 20px;
 }
-.gig > header {
+
+.gig>header {
   font-weight: bolder;
 }
+
 body {
   background-color: #ddd;
 }
+
 main {
-  background-color: $backgroundColorDefault;
+  background-color: light-dark($backgroundColorDefault, $backgroundColorDark);
   padding: 1.5em;
   max-width: 900px;
   margin: 0 auto;
 }
+
 @media screen {
-  #root main.dark {
-    background-color: $backgroundColorDark;
-  }
-  #root main.dark * a,
-  #root main.dark header {
-    color: $colorDark2;
-  }
-  #root main.dark legend {
-    font-weight: bolder;
-    color: $backgroundColorDark;
-  }
-  #root main.dark * {
-    color: $colorDark;
-  }
+  // #root main.dark {
+  //   background-color: $backgroundColorDark;
+  // }
+
+  // #root main.dark * a,
+  // #root main.dark header {
+  //   color: $colorDark2;
+  // }
+
+  // #root main.dark legend {
+  //   font-weight: bolder;
+  //   color: $backgroundColorDark;
+  // }
+
+  // #root main.dark * {
+  //   color: $colorDark;
+  // }
 }
 
 .recommendation {
-  background-color: rgba(255,255,255,.25);
+  background-color: light-dark(rgba(255, 255, 255, .25), rgba(255, 255, 255, .25));
   padding: 20px;
-  margin: 0 -20px;  
+  margin: 0 -20px;
   break-after: auto;
   break-inside: avoid;
 }
+
 section {
   break-before: avoid;
   break-inside: always;
@@ -145,10 +171,11 @@ section {
   margin-bottom: 20px;
   padding: 10px;
 }
+
 #as-configured {
   line-height: .4em;
-//   // display: none;
-//   // visibility: hidden;
+  //   // display: none;
+  //   // visibility: hidden;
 }
 
 
@@ -158,21 +185,25 @@ section {
   #root a {
     text-decoration: none;
   }
-  #configurator, iframe {
+
+  #configurator,
+  iframe {
     display: none;
     visibility: hidden;
   }
+
   #as-configured {
     display: none;
     // display: inline-block;
     // visibility: visible;
   }
 }
+
 aside.recommendation {
   position: relative;
 }
-.recommendation
-time {
+
+.recommendation time {
   // color: red;
   position: absolute;
   right: 20px;
