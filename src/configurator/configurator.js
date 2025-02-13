@@ -49,7 +49,7 @@ export default function Configurator(props) {
       <Grid container>
         <Grid item xs>
           <FormControl>
-            <InputLabel htmlFor="tier-native-helper">Select Desired Job Title</InputLabel>
+            <InputLabel htmlFor="tier-native-helper">Select Job Title</InputLabel>
             <NativeSelect
               value={props.state.jobTier}
               onChange={props.handleChange}

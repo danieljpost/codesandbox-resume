@@ -78,7 +78,7 @@ function ContractGig(props) {
   let skillsUsed = "";
   if (props.verbosity > 8 && props.skillsUsed.length) {
     let someSkills = props.skillsUsed.join(", ");
-    skillsUsed = <div>Skills used: {someSkills}</div>;
+    skillsUsed = <div><header>Skills</header> {someSkills}</div>;
   }
   let dateRange = null;
   let company = "";
