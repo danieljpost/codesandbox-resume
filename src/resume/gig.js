@@ -126,7 +126,7 @@ function OwnerGig(props) {
   let skillsUsed = "";
   if (props.verbosity > 9 && props.skillsUsed.length) {
     let someSkills = props.skillsUsed.join(", ");
-    skillsUsed = <div>Tools used: {someSkills}</div>;
+    skillsUsed = <div><header>Skills: </header>{someSkills}</div>;
   }
   return (
     <section className="gig ownerGig">
