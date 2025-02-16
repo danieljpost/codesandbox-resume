@@ -1,8 +1,7 @@
 $colorDefault: #000;
 $colorDark: #ddd;
-$colorDark2: #eef;
 $backgroundColorDefault: #fff;
-$backgroundColorDark: #334;
+$backgroundColorDark: #333;
 $fontFamily: "Ubuntu";
 $fontMonospace: "Ubuntu Monospace";
 
@@ -110,7 +109,6 @@ span.date.right {
 
 .ownerGig {
   position: relative;
-  // background-color: rgba(0,0,0,.4);
   margin: 20px -20px;
   padding: 10px 20px;
 }
@@ -151,8 +149,8 @@ main {
 }
 
 .recommendation {
-  background-color: light-dark(rgba(255, 255, 255, 0.1),
-      rgba(255, 255, 255, 0.25));
+  // background-color: light-dark(rgba(255, 255, 255, 0.1),
+  //     rgba(255, 255, 255, 0.25));
   padding: 20px;
   margin: 0 -20px;
   break-after: auto;
